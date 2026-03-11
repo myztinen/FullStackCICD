@@ -1,0 +1,7 @@
+POST https://phonebook-faye.onrender.com/api/persons
+Content-type: application/json
+
+{
+    "name": "Jimi Potkukelkka",
+    "number": "060-321654987"
+}
