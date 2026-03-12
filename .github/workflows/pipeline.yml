@@ -8,25 +8,23 @@ on:
     branches: [main]
     types: [opened, synchronize]
 jobs:
-  simple_deployment_pipeline:
+  deployment_pipeline:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install front end dependencies
-        run: |
-              cd puhelinluettelo
-              npm install
-
-      - name: Check style for front end
-        run: |
-              cd puhelinluettelo
-              npm run lint
-      - name: Run tests for front end
-        run: |
-              cd puhelinluettelo
-              npm run test
       - name: Install backend dependencies
         run: npm install
+      - name: Run back tests
+        run: npm run test
+      - name: Install front end dependencies
+        working-directory: puhelinluettelo
+        run:  npm install
+      - name: Check style for front end
+        working-directory: puhelinluettelo
+        run:  npm run lint
+      - name: Run front tests
+        working-directory: puhelinluettelo
+        run: npm run test
