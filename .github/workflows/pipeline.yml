@@ -28,3 +28,11 @@ jobs:
       - name: Run front tests
         working-directory: puhelinluettelo
         run: npm run test
+  deployment_trigger:
+    needs: [deployment_pipeline]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Trigger deployment
+        id: deployment
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}

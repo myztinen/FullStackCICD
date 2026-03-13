@@ -43,6 +43,10 @@ app.get('/hello', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
 
+app.get('/version', (request, response) => {
+  response.send('1.0')
+})
+
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
     response.json(persons)
