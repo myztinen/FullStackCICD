@@ -44,7 +44,7 @@ app.get('/hello', (request, response) => {
 })
 
 app.get('/version', (request, response) => {
-  response.send('1.1')
+  response.send('2.0')
 })
 
 app.get('/api/persons', (request, response) => {
